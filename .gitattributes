@@ -1,0 +1,8 @@
+# Git LFS for model weights only
+*.pth filter=lfs diff=lfs merge=lfs -text
+*.onnx filter=lfs diff=lfs merge=lfs -text
+*.bin filter=lfs diff=lfs merge=lfs -text
+*.pt filter=lfs diff=lfs merge=lfs -text
+
+# Regular git for everything else — NO PNG/JPG in LFS
+# (app generates visuals on-the-fly, no image assets in this repo)

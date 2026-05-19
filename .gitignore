@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+.eggs/
+*.egg-info/
+
+# Virtual env
+venv/
+.env/
+
+# Model weights — too large for git, use HF Model Hub or releases
+models/*.pth
+models/*.onnx
+*.pth
+*.onnx
+
+# Dataset
+data/
+
+# DO NOT commit any images/binaries — they get rejected by HF Spaces
+*.png
+*.jpg
+*.jpeg
+*.gif
+assets/
+
+# Results
+results/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Kaggle key — never commit this
+kaggle.json
