@@ -26,11 +26,16 @@ st.set_page_config(
 # ── Custom CSS ────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-    .risk-critical { background:#fff0f0; border-left:4px solid #d32f2f; padding:12px; border-radius:6px; }
-    .risk-high     { background:#fff3e0; border-left:4px solid #e64a19; padding:12px; border-radius:6px; }
-    .risk-moderate { background:#fffde7; border-left:4px solid #f9a825; padding:12px; border-radius:6px; }
-    .risk-low      { background:#f1f8e9; border-left:4px solid #558b2f; padding:12px; border-radius:6px; }
-    .risk-none     { background:#e8f5e9; border-left:4px solid #2e7d32; padding:12px; border-radius:6px; }
+    /* Risk cards — dark-mode safe with explicit text colours */
+    .risk-critical { background:#3a0000; border-left:4px solid #ff5252; padding:14px 16px; border-radius:8px; color:#ffcccc !important; }
+    .risk-high     { background:#3a1500; border-left:4px solid #ff6e40; padding:14px 16px; border-radius:8px; color:#ffe0cc !important; }
+    .risk-moderate { background:#2e2500; border-left:4px solid #ffd600; padding:14px 16px; border-radius:8px; color:#fff9c4 !important; }
+    .risk-low      { background:#0d2600; border-left:4px solid #76ff03; padding:14px 16px; border-radius:8px; color:#ccff90 !important; }
+    .risk-none     { background:#002200; border-left:4px solid #00e676; padding:14px 16px; border-radius:8px; color:#b9f6ca !important; }
+    .risk-critical *, .risk-high *, .risk-moderate *, .risk-low *, .risk-none * { color: inherit !important; }
+
+    /* Prevent long disease names truncating in metric cards */
+    [data-testid="stMetricValue"] { font-size:1.05rem !important; word-break:break-word; white-space:normal !important; line-height:1.4; }
 </style>
 """, unsafe_allow_html=True)
 
