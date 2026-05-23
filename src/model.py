@@ -29,7 +29,7 @@ class CropGuardModel(nn.Module):
 
 def load_model(checkpoint_path: str, device: str = "cpu") -> CropGuardModel:
     model = CropGuardModel()
-    ckpt  = torch.load(checkpoint_path, map_location=device)
+    ckpt = torch.load(checkpoint_path, map_location=device, weights_only=False)
     state = ckpt.get("model_state_dict", ckpt)
     model.load_state_dict(state)
     model.eval()
