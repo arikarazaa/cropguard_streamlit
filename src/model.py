@@ -29,8 +29,24 @@ class CropGuardModel(nn.Module):
 
 def load_model(checkpoint_path: str, device: str = "cpu") -> CropGuardModel:
     model = CropGuardModel()
-    ckpt = torch.load(checkpoint_path, map_location=device, weights_only=False)
+    ckpt  = torch.load(checkpoint_path, map_location=device, weights_only=False)
     state = ckpt.get("model_state_dict", ckpt)
-    model.load_state_dict(state)
+
+    # Remap keys: notebook used bb/head, app expects backbone/classifier
+    remapped = {}
+    for k, v in state.items():
+        if k.startswith("bb."):
+            remapped[k.replace("bb.", "backbone.", 1)] = v
+        elif k.startswith("head."):
+            remapped[k.replace("head.", "classifier.", 1)] = v
+        else:
+            remapped[k] = v
+
+    # Handle any class count mismatch — load only matching keys
+    model_state = model.state_dict()
+    compatible  = {k: v for k, v in remapped.items()
+                   if k in model_state and v.shape == model_state[k].shape}
+    model_state.update(compatible)
+    model.load_state_dict(model_state)
     model.eval()
     return model.to(device)
